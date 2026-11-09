@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Analiza zilei</title>
+  <meta name="description" content="Compară o zi de ES cu ziua precedentă după AMT: deschiderea față de valoare, overnight, regula de 80%, migrarea valorii și nivelurile pentru ziua următoare.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%232563d9'/%3E%3Crect x='5' y='5' width='6' height='2.6' rx='1' fill='white'/%3E%3Crect x='5' y='9' width='11' height='2.6' rx='1' fill='white'/%3E%3Crect x='5' y='13' width='14' height='2.6' rx='1' fill='white'/%3E%3Crect x='5' y='17' width='8' height='2.6' rx='1' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/tpo.js"></script>
+  <script src="assets/ui.js"></script>
+  <script src="assets/data.js"></script>
+  <script src="assets/analiza.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="4" y="4" width="6" height="3" rx="1"/><rect x="4" y="8.5" width="12" height="3" rx="1"/><rect x="4" y="13" width="16" height="3" rx="1"/><rect x="4" y="17.5" width="9" height="3" rx="1"/></svg></span>Curs AMT & Orderflow</a>
+      <nav class="nav" aria-label="Navigare principală">
+        <a href="index.html">Acasă</a>
+        <a href="lectia-1.html">Lecția 1</a>
+        <a href="analiza-zilei.html">Analiza zilei</a>
+        <a href="unelte.html">Unelte</a>
+        <a href="resurse.html">Resurse</a>
+      </nav>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Schimbă tema (luminos / întunecat)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg></button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="wrap-narrow" style="margin:0 auto;padding:0">
+      <p class="eyebrow">Aplicație practică · AMT</p>
+      <h1>Analiza zilei</h1>
+      <p class="lead">Compari o zi cu ziua precedentă: unde e valoarea, unde deschide piața, dacă valoarea se mută și ce niveluri contează a doua zi.</p>
+
+      <details>
+        <summary>Procedura în 6 pași (citește-o o dată, apoi folosește analizorul)</summary>
+        <div class="details-body">
+          <h3>Pasul 1: Harta zilei precedente (referința)</h3>
+          <p>După închidere (23:00 RO) notezi: <b>RTH High/Low</b> (range-ul), <b>POC, VAH, VAL</b>, <b>IB</b> și dacă a fost extins, <b>extremele</b> (coadă sau poor), <b>single prints</b> din interior și unde a închis față de VA (peste VAH = putere, sub VAL = slăbiciune, în VA = echilibru).</p>
+          <h3>Pasul 2: Overnight-ul (01:00–16:30 RO)</h3>
+          <p><b>ONH / ONL</b> și unde a tranzacționat overnight-ul față de VA și range-ul de ieri. În zilele cu date macro la 15:30 RO (CPI, NFP), overnight-ul e de obicei liniștit până la știre, iar reacția de la 15:30–16:30 face des maximul sau minimul. Întrebarea-cheie: <b>a dus știrea prețul în afara valorii de ieri?</b></p>
+          <h3>Pasul 3: Deschiderea de la 16:30 față de ziua precedentă</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Unde deschide</th><th>Ce înseamnă</th><th>Ce aștepți</th></tr></thead>
+              <tbody>
+                <tr><td><b>În VA de ieri</b></td><td>Echilibru</td><td>Rotații în VA, POC-ul atrage prețul, tranzacții responsive la VAH/VAL</td></tr>
+                <tr><td><b>În afara VA, dar în range</b></td><td>Dezechilibru moderat</td><td>Revine în VA și se menține ≥ 2 perioade TPO? Atunci aplici <b>regula de 80%</b>. Dacă e respins, continuă în afara VA</td></tr>
+                <tr><td><b>În afara range-ului (gap)</b></td><td>Dezechilibru puternic posibil</td><td>Dacă nu revine în range în prima oră, crește probabilitatea unei zile de trend. <b>Nu merge contra mișcării</b></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Pasul 4: Prima oră (16:30–17:30 RO)</h3>
+          <p>Cum pleacă prețul din deschidere (Lecția 2) și cât de lat e IB-ul: un IB îngust face probabilă o extensie mai târziu, iar unul foarte larg (frecvent în zilele de NFP) face mai probabilă o zi de range în interiorul lui.</p>
+          <h3>Pasul 5: În timpul zilei</h3>
+          <p>Construiește prețul TPO-uri <b>în afara</b> valorii de ieri (acceptare)? În ce direcție se face range extension? Activitatea e initiative sau responsive?</p>
+          <h3>Pasul 6: După închidere, unde s-a mutat valoarea?</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Relația dintre VA</th><th>Ce spune despre OTF</th></tr></thead>
+              <tbody>
+                <tr><td><b>Higher value</b>: VA de azi complet peste cea de ieri</td><td>Cumpărătorii controlează, valoarea se mută în sus</td></tr>
+                <tr><td><b>Overlapping higher / lower</b></td><td>Tendință slabă în direcția respectivă</td></tr>
+                <tr><td><b>Inside / outside</b></td><td>Echilibru (inside) sau explorare în ambele direcții (outside)</td></tr>
+                <tr><td><b>Lower value</b>: VA de azi complet sub cea de ieri</td><td>Vânzătorii controlează</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </details>
+
+      <div class="callout callout-info">
+        <span class="callout-title">Două moduri de lucru</span>
+        <b>A.</b> Lipești <b>barele de 30 de minute</b> din RTH (16:30–23:00 RO) pentru fiecare zi: site-ul construiește profilul și completează singur nivelurile. <b>B.</b> Scrii doar <b>nivelurile</b> citite din Quantower (POC, VAH, VAL, High, Low…) și lași câmpurile de bare goale.
+      </div>
+    </div>
+
+    <form id="an-form" autocomplete="off" novalidate>
+      <div class="card">
+        <div class="fields" style="grid-template-columns:repeat(auto-fill,minmax(170px,1fr))">
+          <label class="field">Mărimea rândului TPO
+            <select id="rowSize">
+              <option value="0.25">0,25 (1 tick ES)</option>
+              <option value="0.5">0,5</option>
+              <option value="1">1 punct</option>
+              <option value="2" selected>2 puncte</option>
+              <option value="4">4 puncte</option>
+              <option value="5">5 puncte</option>
+              <option value="10">10 puncte</option>
+            </select>
+            <span class="hint muted">ES: 1–2 puncte · NQ: 5–10 puncte</span>
+          </label>
+          <label class="field">Metoda Value Area
+            <select id="method">
+              <option value="single" selected>Rând cu rând</option>
+              <option value="dual">Câte două rânduri (clasic)</option>
+            </select>
+          </label>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-secondary" type="button" id="demo-btn">Încarcă exemplul demo</button>
+          <button class="btn btn-ghost" type="button" id="clear-btn">Golește tot</button>
+        </div>
+        <p class="muted small" style="margin:0">Exemplul demo folosește zile <b>inventate</b>, ca să vezi cum funcționează analiza. Nu sunt prețuri reale.</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Ziua 1: referința</h3>
+          <label class="field">Numele zilei (opțional)<input id="label1" placeholder="ex: Joi, 5 nov"></label>
+          <label class="field" style="margin-top:10px">Barele de 30 de minute (opțional)
+            <textarea id="bars1" spellcheck="false" placeholder="16:30 7600 7610 7596 7606&#10;17:00 7606 7612 7601 7604&#10;…&#10;(ora open high low close, sau doar ora high low)"></textarea>
+          </label>
+          <p class="muted small">Sau completează nivelurile de mână:</p>
+          <div class="fields">
+            <label class="field">High<input id="d1-high" inputmode="decimal"></label>
+            <label class="field">Low<input id="d1-low" inputmode="decimal"></label>
+            <label class="field">Close<input id="d1-close" inputmode="decimal"></label>
+            <label class="field">POC<input id="d1-poc" inputmode="decimal"></label>
+            <label class="field">VAH<input id="d1-vah" inputmode="decimal"></label>
+            <label class="field">VAL<input id="d1-val" inputmode="decimal"></label>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Ziua 2: ziua analizată</h3>
+          <label class="field">Numele zilei (opțional)<input id="label2" placeholder="ex: Vineri, 6 nov"></label>
+          <p class="muted small" style="margin:10px 0 0">Înainte de deschidere:</p>
+          <div class="fields">
+            <label class="field">ONH (overnight high)<input id="d2-onh" inputmode="decimal"></label>
+            <label class="field">ONL (overnight low)<input id="d2-onl" inputmode="decimal"></label>
+            <label class="field">Open (16:30 RO)<input id="d2-open" inputmode="decimal"></label>
+          </div>
+          <label class="field" style="margin-top:6px">Barele de 30 de minute (opțional, după închidere)
+            <textarea id="bars2" spellcheck="false" placeholder="16:30 7624 7629 7619 7627&#10;…"></textarea>
+          </label>
+          <p class="muted small">Sau, după închidere, nivelurile de mână:</p>
+          <div class="fields">
+            <label class="field">High<input id="d2-high" inputmode="decimal"></label>
+            <label class="field">Low<input id="d2-low" inputmode="decimal"></label>
+            <label class="field">Close<input id="d2-close" inputmode="decimal"></label>
+            <label class="field">POC<input id="d2-poc" inputmode="decimal"></label>
+            <label class="field">VAH<input id="d2-vah" inputmode="decimal"></label>
+            <label class="field">VAL<input id="d2-val" inputmode="decimal"></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn" type="submit">Analizează</button>
+        <span class="muted small">Dacă lipești bare, nivelurile zilei respective se completează (și se suprascriu) automat.</span>
+      </div>
+      <div class="form-errors" id="an-errors" role="alert"></div>
+    </form>
+
+    <div id="out" aria-live="polite"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">Material educațional, nu recomandare de investiții. Exersează în simulator înainte de a folosi bani reali.</div>
+  </footer>
+</body>
+</html>

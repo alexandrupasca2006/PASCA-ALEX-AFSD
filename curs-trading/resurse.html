@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Resurse curs</title>
+  <meta name="description" content="Ore cheie pentru ES în ora României, calendar, platforme, cărți, glosar și checklist-ul zilnic.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%232563d9'/%3E%3Crect x='5' y='5' width='6' height='2.6' rx='1' fill='white'/%3E%3Crect x='5' y='9' width='11' height='2.6' rx='1' fill='white'/%3E%3Crect x='5' y='13' width='14' height='2.6' rx='1' fill='white'/%3E%3Crect x='5' y='17' width='8' height='2.6' rx='1' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/tpo.js"></script>
+  <script src="assets/ui.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="4" y="4" width="6" height="3" rx="1"/><rect x="4" y="8.5" width="12" height="3" rx="1"/><rect x="4" y="13" width="16" height="3" rx="1"/><rect x="4" y="17.5" width="9" height="3" rx="1"/></svg></span>Curs AMT & Orderflow</a>
+      <nav class="nav" aria-label="Navigare principală">
+        <a href="index.html">Acasă</a>
+        <a href="lectia-1.html">Lecția 1</a>
+        <a href="analiza-zilei.html">Analiza zilei</a>
+        <a href="unelte.html">Unelte</a>
+        <a href="resurse.html">Resurse</a>
+      </nav>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Schimbă tema (luminos / întunecat)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg></button>
+    </div>
+  </header>
+
+  <main class="wrap wrap-narrow">
+    <p class="eyebrow">Referință</p>
+    <h1>Resurse</h1>
+    <p class="lead">Tot ce ai nevoie la îndemână: orele importante, calendarul, platformele, cărțile, glosarul și checklist-ul zilnic.</p>
+
+    <nav class="toc" aria-label="Cuprins">
+      <b>Cuprins</b>
+      <ol>
+        <li><a href="#ore">Ore cheie (ora României)</a></li>
+        <li><a href="#calendar">Calendar</a></li>
+        <li><a href="#checklist">Checklist zilnic</a></li>
+        <li><a href="#platforme">Platforme și date</a></li>
+        <li><a href="#carti">Cărți și materiale</a></li>
+        <li><a href="#glosar">Glosar</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="ore">Ore cheie pentru ES / NQ</h2>
+    <p>Iarna, ora României = ora New York + 7 ore.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Ora RO</th><th>Ora NY</th><th>Ce se întâmplă</th></tr></thead>
+        <tbody>
+          <tr><td>01:00</td><td>18:00</td><td>Se deschide Globex (începe noua sesiune)</td></tr>
+          <tr><td>10:00</td><td>03:00</td><td>Deschid Londra și Frankfurt, primul val de volum</td></tr>
+          <tr><td><b>15:30</b></td><td>08:30</td><td>Date macro majore: CPI, NFP, PPI, jobless claims</td></tr>
+          <tr><td><b>16:30</b></td><td>09:30</td><td><b>Deschiderea RTH</b> (bursa cash), cel mai mult volum</td></tr>
+          <tr><td>16:30–17:30</td><td>09:30–10:30</td><td>Initial Balance (perioadele A și B)</td></tr>
+          <tr><td>17:00</td><td>10:00</td><td>Date: ISM, JOLTS, consumer confidence</td></tr>
+          <tr><td>~18:30–20:30</td><td>11:30–13:30</td><td>Prânzul la New York: volum mic, mișcare haotică</td></tr>
+          <tr><td>21:00 / 21:30</td><td>14:00 / 14:30</td><td>FOMC: decizia / conferința de presă (de 8 ori pe an)</td></tr>
+          <tr><td>~22:50</td><td>15:50</td><td>Se publică dezechilibrele MOC; ultima oră are des o direcție clară</td></tr>
+          <tr><td>23:00</td><td>16:00</td><td>Se închide piața cash. Futures merg până la 00:00 RO, apoi au o pauză de 1 oră</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout callout-warn">
+      <span class="callout-title">Atenție la ora de vară</span>
+      SUA și Europa schimbă ora la date diferite. În martie (2–3 săptămâni) și la sfârșitul lui octombrie (~1 săptămână), diferența e de <b>6 ore</b>: atunci RTH începe la 15:30 RO și toate orele de mai sus vin cu o oră mai devreme.
+    </div>
+
+    <h2 id="calendar">Calendar</h2>
+    <ul>
+      <li><b>OPEX</b>: a treia vineri din fiecare lună (expirarea opțiunilor lunare). <b>Quad witching</b>: în martie, iunie, septembrie și decembrie.</li>
+      <li><b>Rollover</b> la futures pe indici: trimestrial, cu ~8 zile înainte de expirare. De la ESZ6 la ESH7 se trece în jurul datei de <b>10 decembrie 2026</b>.</li>
+      <li><b>FOMC</b>: de 8 ori pe an. Verifică datele exacte în calendarul Fed sau într-un calendar economic.</li>
+      <li><b>Sfârșit de lună / trimestru</b>: rebalansări ale fondurilor. <b>Sărbătorile din SUA</b> au volum mic (de exemplu Thanksgiving, pe 26 noiembrie 2026).</li>
+    </ul>
+
+    <h2 id="checklist">Checklist zilnic</h2>
+    <ol class="steps-list">
+      <li><b>Seara (după 23:00):</b> harta zilei: POC, VAH, VAL, High/Low, IB, extreme (coadă / poor), single prints, tipul zilei. Folosește <a href="analiza-zilei.html">Analiza zilei</a>.</li>
+      <li><b>Dimineața:</b> unde a tranzacționat overnight-ul față de valoarea de ieri? ONH și ONL. Ce date macro sunt azi (15:30, 17:00)? E zi de FOMC sau OPEX?</li>
+      <li><b>Înainte de 15:30:</b> nivelurile de gamma (QuantWheel: regimul față de Gamma Flip, Call Wall, Put Wall, deja convertite pe ES).</li>
+      <li><b>Ipoteze:</b> „În valoare și cu gamma pozitivă → caut să intru contra mișcării la margini. În afara range-ului și cu gamma negativă → caut continuare.”</li>
+      <li><b>La 16:30:</b> unde deschide piața față de VA și range-ul de ieri? Cum se comportă în prima oră?</li>
+      <li><b>Execuție:</b> aștepți prețul la nivel și confirmarea din orderflow, cu riscul definit dinainte.</li>
+      <li><b>Jurnal:</b> screenshot-uri, ce ai văzut, ce ai făcut, ce ai învățat.</li>
+    </ol>
+
+    <h2 id="platforme">Platforme și date</h2>
+    <div class="grid">
+      <div class="card">
+        <span class="card-kicker">Recomandat pentru început</span>
+        <h3>AMP + Quantower</h3>
+        <p class="small">Quantower e gratuit pentru clienții AMP (conexiune AMP/CQG), cu cont demo de 28 de zile. Are <b>TPO Profile Chart</b> și <b>DOM Surface</b>. De verificat în demo: footprint-ul în varianta gratuită și replay-ul. Contul live are un depozit minim de $100; datele CME real-time se plătesc separat.</p>
+        <p class="small"><a href="https://www.ampfutures.com/trading-platform/quantower-free" rel="noopener">AMP: Quantower gratuit</a></p>
+      </div>
+      <div class="card">
+        <span class="card-kicker">Orderflow avansat</span>
+        <h3>DeepCharts</h3>
+        <p class="small">Footprint, Volume Profile, DOM și heatmap DeepDOM pe date MBO (Rithmic recomandat). Feed întârziat gratuit, altfel în jur de $45–69/lună plus datele. TPO neconfirmat.</p>
+        <p class="small"><a href="https://optimusfutures.com/deepcharts-futures-trading-platform.php" rel="noopener">Optimus Futures: DeepCharts</a></p>
+      </div>
+      <div class="card">
+        <span class="card-kicker">Gamma</span>
+        <h3>QuantWheel</h3>
+        <p class="small">Pagini GEX gratuite (~3 calcule pe zi pe ticker) și plan Sandbox cu date întârziate. Indicatorul convertește nivelurile SPX/SPY pe ES/MES. Cifrele sunt modelate, nu poziția reală a dealerilor.</p>
+        <p class="small"><a href="https://quantwheel.com/pricing" rel="noopener">QuantWheel: prețuri</a></p>
+      </div>
+    </div>
+    <p class="muted small">Prețurile și ofertele se schimbă: verifică-le pe site-urile oficiale înainte să plătești.</p>
+
+    <h2 id="carti">Cărți și materiale</h2>
+    <ul>
+      <li><b>James Dalton</b>, <i>Mind Over Markets</i>: biblia AMT și Market Profile. Începe cu ea.</li>
+      <li><b>James Dalton</b>, <i>Markets in Profile</i>: AMT aplicat, cu psihologie și context.</li>
+      <li><b>J. Peter Steidlmayer</b>, <i>Steidlmayer on Markets</i>: de la creatorul Market Profile.</li>
+      <li><b>Trader Dale</b>, <i>Volume Profile</i> și <i>Order Flow: Trading Setups</i>.</li>
+      <li><b>Sheldon Natenberg</b>, <i>Option Volatility and Pricing</i>: capitolele despre greeks (pentru gamma).</li>
+      <li>Canalul de YouTube <b>Axia Futures</b> și materialele <b>Jigsaw Trading</b> (orderflow).</li>
+      <li>White paper-ul gratuit <b>SqueezeMetrics</b> despre GEX.</li>
+    </ul>
+
+    <h2 id="glosar">Glosar</h2>
+    <dl class="kv">
+      <dt>AMT</dt><dd>Auction Market Theory: piața ca licitație care caută prețul corect.</dd>
+      <dt>RTH / ETH</dt><dd>Regular Trading Hours (16:30–23:00 RO pentru ES) / Electronic Trading Hours (sesiunea completă, aproape 24 de ore).</dd>
+      <dt>TPO</dt><dd>Time Price Opportunity: o literă pentru fiecare perioadă de 30 de minute în care prețul a atins un nivel.</dd>
+      <dt>POC</dt><dd>Point of Control: prețul cu cele mai multe TPO-uri sau cel mai mult volum.</dd>
+      <dt>VA, VAH, VAL</dt><dd>Value Area (~70% din activitate în jurul POC-ului), marginea ei de sus și marginea de jos.</dd>
+      <dt>IB</dt><dd>Initial Balance: range-ul primei ore RTH (perioadele A și B).</dd>
+      <dt>Range extension</dt><dd>Ieșirea prețului din IB după prima oră.</dd>
+      <dt>OTF</dt><dd>Other Timeframe: participanți cu orizont de zile sau săptămâni (fonduri, instituții), care mută valoarea.</dd>
+      <dt>Initiative / Responsive</dt><dd>Cumpărare peste valoare sau vânzare sub valoare (initiative) vs cumpărare sub valoare sau vânzare peste valoare (responsive).</dd>
+      <dt>Single prints</dt><dd>Rânduri cu o singură literă: mișcare rapidă.</dd>
+      <dt>Coadă (tail), excess</dt><dd>Cel puțin 2 single prints la o extremă: respingere puternică, licitație terminată.</dd>
+      <dt>Poor high / low</dt><dd>Extremă plată, cu mai multe litere la același preț și fără coadă: licitație neterminată.</dd>
+      <dt>Naked POC</dt><dd>POC-ul unei zile pe care prețul nu l-a mai atins după aceea: magnet.</dd>
+      <dt>ONH / ONL</dt><dd>Maximul și minimul din sesiunea overnight.</dd>
+      <dt>Delta, CVD</dt><dd>Volumul la ask minus volumul la bid; CVD = delta cumulată în timp.</dd>
+      <dt>GEX, Gamma Flip</dt><dd>Expunerea estimată a dealerilor la gamma; Gamma Flip e prețul la care regimul trece din pozitiv în negativ.</dd>
+      <dt>Call Wall / Put Wall</dt><dd>Strike-urile cu cea mai mare gamma pe call-uri / put-uri; des rezistență / suport.</dd>
+      <dt>OPEX</dt><dd>Expirarea opțiunilor: a treia vineri din lună.</dd>
+    </dl>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap wrap-narrow">Material educațional, nu recomandare de investiții. Exersează în simulator înainte de a folosi bani reali.</div>
+  </footer>
+</body>
+</html>

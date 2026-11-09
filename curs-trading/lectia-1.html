@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecția 1: Licitația</title>
+  <meta name="description" content="Modulul 1, Lecția 1: piața ca licitație, participanții, echilibru și dezechilibru, Value Area, Market Profile (TPO) și extremele profilului.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%232563d9'/%3E%3Crect x='5' y='5' width='6' height='2.6' rx='1' fill='white'/%3E%3Crect x='5' y='9' width='11' height='2.6' rx='1' fill='white'/%3E%3Crect x='5' y='13' width='14' height='2.6' rx='1' fill='white'/%3E%3Crect x='5' y='17' width='8' height='2.6' rx='1' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/tpo.js"></script>
+  <script src="assets/ui.js"></script>
+  <script src="assets/data.js"></script>
+  <script src="assets/lectia-1.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="4" y="4" width="6" height="3" rx="1"/><rect x="4" y="8.5" width="12" height="3" rx="1"/><rect x="4" y="13" width="16" height="3" rx="1"/><rect x="4" y="17.5" width="9" height="3" rx="1"/></svg></span>Curs AMT & Orderflow</a>
+      <nav class="nav" aria-label="Navigare principală">
+        <a href="index.html">Acasă</a>
+        <a href="lectia-1.html">Lecția 1</a>
+        <a href="analiza-zilei.html">Analiza zilei</a>
+        <a href="unelte.html">Unelte</a>
+        <a href="resurse.html">Resurse</a>
+      </nav>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Schimbă tema (luminos / întunecat)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg></button>
+    </div>
+  </header>
+
+  <main class="wrap wrap-narrow">
+    <p class="eyebrow">Modulul 1 · AMT · Lecția 1</p>
+    <h1>Licitația, valoarea și profilul</h1>
+    <p class="lead">Fundația pe care se construiește tot restul: de ce se mișcă prețul, cine îl mișcă, unde e „prețul corect” și cum îl citești într-un profil.</p>
+
+    <div class="callout callout-tip">
+      <span class="callout-title">La finalul lecției vei ști</span>
+      <ul>
+        <li>de ce piața e o licitație și ce înseamnă <i>excess</i>;</li>
+        <li>diferența dintre participanții <i>Day Timeframe</i> și <i>Other Timeframe</i>, și dintre activitatea <i>initiative</i> și <i>responsive</i>;</li>
+        <li>cum recunoști echilibrul și dezechilibrul;</li>
+        <li>cum se calculează POC și Value Area;</li>
+        <li>cum citești un profil TPO: IB, cozi, poor highs/lows, single prints.</li>
+      </ul>
+    </div>
+
+    <nav class="toc" aria-label="Cuprins">
+      <b>Cuprins</b>
+      <ol>
+        <li><a href="#licitatia">Piața e o licitație</a></li>
+        <li><a href="#participanti">Cine participă</a></li>
+        <li><a href="#echilibru">Echilibru vs dezechilibru</a></li>
+        <li><a href="#valoarea">Valoarea: POC, VA, VAH, VAL</a></li>
+        <li><a href="#tpo">Market Profile (TPO)</a></li>
+        <li><a href="#extreme">Extremele profilului</a></li>
+        <li><a href="#rezumat">Rezumat</a></li>
+        <li><a href="#exercitiul-1">Exercițiul 1 (interactiv)</a></li>
+        <li><a href="#exercitiul-2">Exercițiul 2 (Quantower)</a></li>
+        <li><a href="#quiz">Quiz</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="licitatia">1. Piața e o licitație</h2>
+    <p><b>Analogie: piața de roșii.</b></p>
+    <ul>
+      <li>Dimineața roșiile sunt la 5 lei și se cumpără mult. Vânzătorul vede cererea și urcă prețul la 7 lei.</li>
+      <li>La 7 lei cumpără mai puțini. La 9 lei nu mai cumpără nimeni: cumpărarea s-a oprit.</li>
+      <li>Prețul coboară înapoi spre 6–7 lei. Acolo se fac cele mai multe tranzacții, iar zona aceea e <b>valoarea</b>.</li>
+    </ul>
+    <p>Futures-urile funcționează la fel, doar că mult mai repede. Regula de bază din Auction Market Theory:</p>
+    <blockquote><p>Prețul urcă până oprește cumpărarea și coboară până oprește vânzarea.</p></blockquote>
+    <p>Piața merge mereu puțin <i>prea departe</i>, pentru că doar așa află unde se termină interesul. Când a mers prea departe, partea opusă intră agresiv și prețul e respins rapid. Asta se numește <b>excess</b> și e semnul că licitația s-a terminat în direcția aceea.</p>
+
+    <h2 id="participanti">2. Cine participă</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th></th><th>Day Timeframe</th><th>Other Timeframe (OTF)</th></tr></thead>
+        <tbody>
+          <tr><td><b>Cine</b></td><td>Scalperi, day traderi, market makeri</td><td>Fonduri, instituții, traderi swing</td></tr>
+          <tr><td><b>Orizont</b></td><td>Minute sau ore</td><td>Zile, săptămâni, luni</td></tr>
+          <tr><td><b>Rol</b></td><td>Dau lichiditate, fac piața să oscileze</td><td><b>Mută prețul</b> spre valoare nouă</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><b>Activitatea initiative vs responsive</b>, raportată la Value Area de ieri:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th></th><th>Sub valoare</th><th>Peste valoare</th></tr></thead>
+        <tbody>
+          <tr><td><b>Cumpărare</b></td><td>Responsive („e ieftin”)</td><td><b>Initiative</b> („va fi mai scump”)</td></tr>
+          <tr><td><b>Vânzare</b></td><td><b>Initiative</b> („va fi mai ieftin”)</td><td>Responsive („e scump”)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul>
+      <li><b>Responsive</b>: prețul e împins înapoi spre valoare, deci piața e în echilibru.</li>
+      <li><b>Initiative confirmată</b>: OTF-ul caută valoare nouă. <b>Nu merge contra mișcării.</b></li>
+    </ul>
+
+    <h2 id="echilibru">3. Echilibru vs dezechilibru</h2>
+    <figure class="diagram" aria-label="Ciclul echilibru, dezechilibru, echilibru nou">
+      <svg viewBox="0 0 660 210" role="img">
+        <title>Echilibru → ruptură (dezechilibru, trend) → echilibru nou</title>
+        <defs>
+          <marker id="arrowhead" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" class="svg-arrowhead"/>
+          </marker>
+        </defs>
+        <text x="110" y="112" text-anchor="middle" class="svg-text">Echilibru</text>
+        <rect x="20" y="122" width="180" height="64" rx="10" class="svg-box"/>
+        <polyline points="32,160 50,136 70,174 90,140 110,170 130,136 150,168 170,142 188,158" class="svg-zig"/>
+        <path d="M205 150 C 300 150, 360 70, 452 64" class="svg-arrow" marker-end="url(#arrowhead)"/>
+        <text x="330" y="150" text-anchor="middle" class="svg-sub">ruptură → trend</text>
+        <text x="330" y="168" text-anchor="middle" class="svg-sub">(caută valoare nouă)</text>
+        <text x="550" y="22" text-anchor="middle" class="svg-text">Echilibru nou</text>
+        <rect x="460" y="32" width="180" height="64" rx="10" class="svg-box"/>
+        <polyline points="472,70 490,46 510,84 530,50 550,80 570,46 590,78 610,52 628,68" class="svg-zig"/>
+      </svg>
+    </figure>
+    <p>Piața alternează între două faze:</p>
+    <ul>
+      <li><b>Echilibru (range)</b>: cumpărătorii și vânzătorii sunt de acord asupra prețului. Cauți tranzacții <b>responsive</b>: cumperi la marginea de jos, vinzi la marginea de sus.</li>
+      <li><b>Dezechilibru (trend)</b>: o parte domină și piața caută un preț nou. Cauți tranzacții <b>initiative</b>, în direcția mișcării.</li>
+    </ul>
+    <p><b>La ieșirea dintr-un range</b> sunt două scenarii posibile:</p>
+    <ol>
+      <li><b>Acceptare</b>: prețul rămâne afară, petrece timp acolo și construiește valoare nouă. Mișcarea continuă.</li>
+      <li><b>Respingere</b>: prețul revine în range și de multe ori traversează <b>până la marginea opusă</b>. Tiparul se numește <i>look above and fail</i> (sau <i>look below and fail</i> când ieșirea e în jos).</li>
+    </ol>
+
+    <h2 id="valoarea">4. Valoarea: POC, VA, VAH, VAL</h2>
+    <p>Dacă rotești un profil de volum la 90°, de obicei arată ca un <b>clopot</b> (distribuție normală).</p>
+    <ul>
+      <li><b>POC (Point of Control)</b>: prețul cu cel mai mult volum. E „prețul cel mai corect” al zilei.</li>
+      <li><b>Value Area (VA)</b>: zona din jurul POC-ului unde s-a tranzacționat <b>~70%</b> din volum (aproximativ o deviație standard).</li>
+      <li><b>VAH / VAL</b>: marginea de sus și marginea de jos a VA.</li>
+    </ul>
+
+    <h3>Exemplu lucrat: cum se calculează VA</h3>
+    <p>Un profil de volum cu 100 de contracte în total:</p>
+    <div id="volume-example" class="card"></div>
+    <p><b>Metoda rând cu rând:</b> pornești de la POC. La fiecare pas compari primul rând neadăugat de deasupra cu primul rând neadăugat de dedesubt și îl adaugi pe cel mai mare. Te oprești când ai cel puțin 70% din total.</p>
+    <div id="volume-steps"></div>
+    <div class="callout">
+      Platforma calculează asta automat, dar merită să înțelegi mecanismul. Există și o metodă clasică cu <b>câte două rânduri odată</b>, pe care o folosesc unele platforme. De aceea VA poate diferi cu 1–2 tick-uri între platforme, și e normal.
+    </div>
+    <p><b>De ce contează mâine:</b> VAH, VAL și POC de azi sunt <b>referințele principale</b> pentru ziua de mâine. Deschiderea față de ele îți spune dacă piața e în echilibru sau în dezechilibru (asta e Lecția 2).</p>
+
+    <h2 id="tpo">5. Market Profile (TPO)</h2>
+    <p><b>TPO</b> vine de la <i>Time Price Opportunity</i>. Fiecare <b>literă</b> marchează o perioadă de 30 de minute în care prețul a atins acel nivel. Pentru ES în sesiunea RTH, în ora României:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Literă</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th><th>I</th><th>J</th><th>K</th><th>L</th><th>M</th></tr></thead>
+        <tbody><tr><td><b>Ora RO</b></td><td>16:30</td><td>17:00</td><td>17:30</td><td>18:00</td><td>18:30</td><td>19:00</td><td>19:30</td><td>20:00</td><td>20:30</td><td>21:00</td><td>21:30</td><td>22:00</td><td>22:30</td></tr></tbody>
+      </table>
+    </div>
+    <ul>
+      <li><b>Initial Balance (IB)</b>: range-ul perioadelor <b>A + B</b>, adică prima oră (16:30–17:30 RO).</li>
+      <li><b>Range extension</b>: prețul iese din IB, semn că OTF-ul a intrat în joc.</li>
+    </ul>
+
+    <div class="callout callout-info" id="faq-deschidere">
+      <span class="callout-title">Întrebare frecventă: „deschiderea” e cea de la 01:00 sau cea de la 16:30?</span>
+      <p>În AMT clasic, pentru ES/NQ, „deschiderea” e cea de la <b>9:30 NY = 16:30 RO</b>, iar „VA de ieri” e Value Area din <b>sesiunea RTH de ieri</b> (16:30–23:00 RO), nu din sesiunea de 24 de ore. Motivul: la 16:30 se deschide bursa cash și intră cel mai mult volum și cei mai mulți participanți OTF.</p>
+      <p>Overnight-ul (01:00–16:30 RO) nu se ignoră, se analizează separat: <b>ONH/ONL</b> (maximul și minimul din overnight), unde a tranzacționat față de VA de ieri și <b>inventarul overnight</b> (dacă a urcat mult, mulți sunt long și apare des o corecție la deschidere). Luni, „ieri” înseamnă <b>vineri</b>.</p>
+      <p>În SUA și Europa ora de vară se schimbă la date diferite. În martie (2–3 săptămâni) și la sfârșitul lui octombrie (~1 săptămână), diferența RO–NY e de 6 ore, nu 7. Atunci RTH începe la 15:30 RO.</p>
+    </div>
+
+    <p><b>TPO vs Volume Profile:</b> TPO-ul măsoară <b>timpul</b> petrecut la fiecare preț, Volume Profile măsoară <b>volumul</b>. De obicei arată asemănător. Când diferă, diferența e informație: de exemplu, volum mare în timp scurt înseamnă participanți mari foarte activi.</p>
+    <p><b>Principiul lui Steidlmayer:</b></p>
+    <blockquote><p>Prețul face reclamă oportunității → timpul o reglează → volumul măsoară succesul.</p></blockquote>
+    <p>Exemplu: prețul urcă la un nivel nou (reclamă). Dacă stă acolo mai multe perioade TPO, piața acceptă prețul (timp). Dacă volumul crește, mișcarea are susținere (succes).</p>
+
+    <h2 id="extreme">6. Extremele profilului: licitație terminată sau neterminată</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Ce vezi</th><th>Ce înseamnă</th><th>Ce faci cu informația</th></tr></thead>
+        <tbody>
+          <tr><td><b>Coadă (tail)</b>: cel puțin 2 <b>single prints</b> (rânduri cu o singură literă) la extremă</td><td><b>Excess</b>: respingere puternică, licitație terminată</td><td>Referință solidă de suport sau rezistență</td></tr>
+          <tr><td><b>Poor high / poor low</b>: extremă „plată”, cu mai multe litere la același maxim/minim și fără coadă</td><td>Licitație <b>neterminată</b></td><td>Prețul <b>tinde să revină</b> acolo</td></tr>
+          <tr><td><b>Single prints în mijlocul profilului</b></td><td>Mișcare rapidă, initiative</td><td>Zonă importantă la revenire</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="rezumat">Rezumat în 5 idei</h2>
+    <ol>
+      <li>Piața e o licitație: urcă până oprește cumpărarea și coboară până oprește vânzarea.</li>
+      <li>OTF-ul mută prețul, Day Timeframe-ul îl face să oscileze.</li>
+      <li>În echilibru cauți tranzacții <b>responsive</b>, în dezechilibru tranzacții <b>initiative</b>.</li>
+      <li>VA = 70% din volum în jurul POC-ului. VAH, VAL și POC de ieri sunt referințele de azi.</li>
+      <li>Coada la extremă = licitație terminată. Extrema plată (poor) = licitație neterminată, la care prețul tinde să revină.</li>
+    </ol>
+
+    <h2 id="exercitiul-1">✏️ Exercițiul 1 (interactiv)</h2>
+    <p>Profilul de mai jos e simplificat: o literă = 30 de minute, rânduri de câte 1 punct. Răspunde la întrebări, apoi apasă <b>Verifică</b>. Deschide soluția doar după ce ai încercat.</p>
+    <div class="card exercise">
+      <div id="ex1-profile"></div>
+      <form id="ex1-form" autocomplete="off" novalidate>
+        <h3>a) Initial Balance</h3>
+        <div class="fields">
+          <label class="field" data-q="ibHigh">IB high<input inputmode="decimal" name="ibHigh"><span class="hint"></span></label>
+          <label class="field" data-q="ibLow">IB low<input inputmode="decimal" name="ibLow"><span class="hint"></span></label>
+          <label class="field" data-q="ibExt">A fost extins?
+            <select name="ibExt"><option value="">alege…</option><option value="nu">Nu</option><option value="sus">Da, în sus</option><option value="jos">Da, în jos</option><option value="ambele">Da, în ambele direcții</option></select><span class="hint"></span>
+          </label>
+        </div>
+        <h3>b) și c) Valoarea</h3>
+        <div class="fields">
+          <label class="field" data-q="poc">POC<input inputmode="decimal" name="poc"><span class="hint"></span></label>
+          <label class="field" data-q="total">Total TPO-uri<input inputmode="numeric" name="total"><span class="hint"></span></label>
+          <label class="field" data-q="vah">VAH (70%, rând cu rând)<input inputmode="decimal" name="vah"><span class="hint"></span></label>
+          <label class="field" data-q="val">VAL<input inputmode="decimal" name="val"><span class="hint"></span></label>
+        </div>
+        <h3>d) și e) Extremele</h3>
+        <div class="fields">
+          <label class="field" data-q="high">Ce observi la maxim?
+            <select name="high"><option value="">alege…</option><option value="tail">Coadă (excess)</option><option value="poor">Poor high</option><option value="none">Nimic special</option></select><span class="hint"></span>
+          </label>
+          <label class="field" data-q="low">Ce observi la minim?
+            <select name="low"><option value="">alege…</option><option value="tail">Coadă (excess)</option><option value="poor">Poor low</option><option value="none">Nimic special</option></select><span class="hint"></span>
+          </label>
+        </div>
+        <h3>f) Bonus</h3>
+        <label class="field">Mâine piața deschide la 5003. Unde e prețul față de VA și ce niveluri urmărești?
+          <textarea name="bonus" rows="4" style="min-height:96px;font-family:var(--font)" placeholder="Scrie-ți raționamentul…"></textarea>
+        </label>
+        <div class="btn-row">
+          <button class="btn" type="submit">Verifică</button>
+          <button class="btn btn-secondary" type="button" id="ex1-solution-btn">Arată soluția</button>
+          <button class="btn btn-ghost" type="button" id="ex1-reset">Resetează</button>
+        </div>
+        <div class="result" id="ex1-result" role="status"></div>
+      </form>
+      <div id="ex1-solution" hidden>
+        <h3>Soluția</h3>
+        <div id="ex1-solution-profile"></div>
+        <div id="ex1-solution-text"></div>
+      </div>
+    </div>
+
+    <h2 id="exercitiul-2">🖥️ Exercițiul 2 (în Quantower)</h2>
+    <ol>
+      <li>Deschide un <b>TPO chart pe ES</b> cu perioade de 30 de minute, doar sesiunea RTH (16:30–23:00 RO).</li>
+      <li>Alege o zi recentă (de exemplu <b>vineri, 6 noiembrie</b>) și notează POC, VAH, VAL, IB high/low, dacă IB-ul a fost extins și dacă există cozi sau extreme „poor”.</li>
+      <li>Pune alături un <b>Volume Profile</b> pe aceeași sesiune. Sunt POC-urile la același preț?</li>
+      <li>Verifică-te: copiază high și low pentru fiecare bară de 30 de minute (le vezi când treci cu mouse-ul peste bară) și lipește-le în <a href="unelte.html#tpo">Constructorul TPO</a>. Compară rezultatul cu ce ai notat.</li>
+    </ol>
+    <p class="muted small">Valorile pot diferi puțin de Quantower în funcție de mărimea rândului și de metoda de calcul a VA. Nu te îngrijora de diferențe de 1–2 tick-uri.</p>
+
+    <h2 id="quiz">❓ Quiz</h2>
+    <div id="quiz-box"></div>
+    <div class="result" id="quiz-score" role="status"></div>
+
+    <hr>
+    <div class="card done-box">
+      <div>
+        <b>Gata cu Lecția 1?</b>
+        <p class="muted small" style="margin:0">Trimite-mi în chat răspunsurile tale (mai ales la bonus și la Exercițiul 2), ca să le corectăm. Urmează <b>Lecția 2: Deschiderea și Initial Balance</b>.</p>
+      </div>
+      <button class="btn" type="button" data-complete="l1">Marchează lecția ca terminată</button>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap wrap-narrow">Material educațional, nu recomandare de investiții. Exersează în simulator înainte de a folosi bani reali.</div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Curs AMT & Orderflow</title>
+  <meta name="description" content="Curs pas cu pas de Auction Market Theory, orderflow, timp și gamma pentru futures (ES/MES), cu exerciții interactive și unelte de analiză.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%232563d9'/%3E%3Crect x='5' y='5' width='6' height='2.6' rx='1' fill='white'/%3E%3Crect x='5' y='9' width='11' height='2.6' rx='1' fill='white'/%3E%3Crect x='5' y='13' width='14' height='2.6' rx='1' fill='white'/%3E%3Crect x='5' y='17' width='8' height='2.6' rx='1' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/tpo.js"></script>
+  <script src="assets/ui.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="4" y="4" width="6" height="3" rx="1"/><rect x="4" y="8.5" width="12" height="3" rx="1"/><rect x="4" y="13" width="16" height="3" rx="1"/><rect x="4" y="17.5" width="9" height="3" rx="1"/></svg></span>Curs AMT & Orderflow</a>
+      <nav class="nav" aria-label="Navigare principală">
+        <a href="index.html">Acasă</a>
+        <a href="lectia-1.html">Lecția 1</a>
+        <a href="analiza-zilei.html">Analiza zilei</a>
+        <a href="unelte.html">Unelte</a>
+        <a href="resurse.html">Resurse</a>
+      </nav>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Schimbă tema (luminos / întunecat)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg></button>
+    </div>
+  </header>
+
+  <main class="wrap wrap-narrow">
+    <p class="eyebrow">Futures · ES / MES</p>
+    <h1>Orderflow, AMT, Time și Gamma</h1>
+    <p class="lead">Cursul tău pas cu pas: teorie, exemple lucrate, exerciții interactive și unelte cu care analizezi zilele reale din Quantower.</p>
+    <div class="btn-row">
+      <a class="btn" href="lectia-1.html">Începe cu Lecția 1</a>
+      <a class="btn btn-secondary" href="analiza-zilei.html">Analizează o zi</a>
+    </div>
+
+    <h2>Cum folosești site-ul</h2>
+    <ol class="steps-list">
+      <li><b>Citește lecția</b> în ordine. Fiecare are teorie, un exemplu lucrat și un rezumat.</li>
+      <li><b>Fă exercițiile direct pe pagină.</b> Introduci răspunsul, apeși „Verifică” și primești feedback. Soluția o deschizi abia după ce ai încercat.</li>
+      <li><b>Aplică pe date reale.</b> În <a href="analiza-zilei.html">Analiza zilei</a> lipești barele de 30 de minute din Quantower (sau doar nivelurile), iar site-ul îți construiește profilul și îți explică ziua.</li>
+      <li><b>Trimite-mi în chat</b> răspunsurile, întrebările și ce nu e clar, ca să corectăm împreună și să trecem la lecția următoare.</li>
+    </ol>
+    <div class="callout callout-info">
+      <span class="callout-title">Totul rămâne pe calculatorul tău</span>
+      Site-ul nu are server și nu trimite date nicăieri. Progresul și ce scrii în formulare se salvează doar în browserul tău.
+    </div>
+
+    <h2>Cum se leagă cele 4 concepte</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Concept</th><th>Ce îți spune</th><th>Rol</th></tr></thead>
+        <tbody>
+          <tr><td><b>AMT</b></td><td><i>Unde</i> e valoarea; e piața în echilibru sau caută un preț nou?</td><td>Context</td></tr>
+          <tr><td><b>Time</b></td><td><i>Când</i> se mișcă piața și cât timp acceptă un preț</td><td>Filtru</td></tr>
+          <tr><td><b>Gamma</b></td><td><i>Cum</i> se va comporta probabil piața azi: range sau trend</td><td>Regim</td></tr>
+          <tr><td><b>Orderflow</b></td><td><i>Cine</i> agresează acum la nivelul tău</td><td>Trigger de intrare</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <blockquote><p>Regula de bază: <b>context → locație (nivel) → confirmare (orderflow)</b>. Orderflow fără context e doar zgomot.</p></blockquote>
+
+    <h2>Planul cursului</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Modul</th><th>Lecție</th><th>Stare</th></tr></thead>
+        <tbody>
+          <tr data-progress-for="l1"><td rowspan="4"><b>1. AMT</b></td><td><span class="progress-dot"></span><a href="lectia-1.html">L1 · Licitația, valoarea și profilul</a></td><td><span class="badge badge-ok">Disponibilă</span></td></tr>
+          <tr><td><span class="progress-dot"></span>L2 · Deschiderea și Initial Balance</td><td><span class="badge badge-soon">În curând</span></td></tr>
+          <tr><td><span class="progress-dot"></span>L3 · Tipuri de zile și regula de 80%</td><td><span class="badge badge-soon">În curând</span></td></tr>
+          <tr><td><span class="progress-dot"></span>L4 · Niveluri de referință</td><td><span class="badge badge-soon">În curând</span></td></tr>
+          <tr><td><b>2. Time</b></td><td><span class="progress-dot"></span>L5 · Sesiuni, ore cheie, calendar</td><td><span class="badge badge-soon">În curând</span></td></tr>
+          <tr><td rowspan="4"><b>3. Orderflow</b></td><td><span class="progress-dot"></span>L6 · Bid/ask, DOM, tape</td><td><span class="badge badge-soon">În curând</span></td></tr>
+          <tr><td><span class="progress-dot"></span>L7 · Footprint și delta</td><td><span class="badge badge-soon">În curând</span></td></tr>
+          <tr><td><span class="progress-dot"></span>L8 · Absorbție, epuizare, imbalanțe</td><td><span class="badge badge-soon">În curând</span></td></tr>
+          <tr><td><span class="progress-dot"></span>L9 · VWAP și Volume Profile intraday</td><td><span class="badge badge-soon">În curând</span></td></tr>
+          <tr><td rowspan="2"><b>4. Gamma</b></td><td><span class="progress-dot"></span>L10 · Delta, gamma, dealeri</td><td><span class="badge badge-soon">În curând</span></td></tr>
+          <tr><td><span class="progress-dot"></span>L11 · Regimuri, flip, walls, 0DTE, OPEX</td><td><span class="badge badge-soon">În curând</span></td></tr>
+          <tr><td><b>5. Integrare</b></td><td><span class="progress-dot"></span>L12 · Checklist, risc, jurnal</td><td><span class="badge badge-soon">În curând</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted small">Lecțiile noi apar aici pe măsură ce le parcurgem împreună în chat.</p>
+
+    <h2>Unelte</h2>
+    <div class="grid">
+      <a class="card" href="analiza-zilei.html">
+        <span class="card-kicker">Analiză</span>
+        <h3>Analiza zilei</h3>
+        <p class="muted">Compari o zi cu ziua precedentă: unde deschide piața, regula de 80%, cum se mută valoarea și ce niveluri contează mâine.</p>
+      </a>
+      <a class="card" href="unelte.html#tpo">
+        <span class="card-kicker">Profil</span>
+        <h3>Constructor TPO</h3>
+        <p class="muted">Lipești barele de 30 de minute și primești profilul cu POC, VA, IB, cozi, poor highs/lows și pașii de calcul.</p>
+      </a>
+      <a class="card" href="resurse.html">
+        <span class="card-kicker">Referință</span>
+        <h3>Resurse</h3>
+        <p class="muted">Ore cheie în ora României, calendar, platforme, cărți, glosar și checklist-ul zilnic.</p>
+      </a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap wrap-narrow">Material educațional, nu recomandare de investiții. Exersează în simulator înainte de a folosi bani reali.</div>
+  </footer>
+</body>
+</html>

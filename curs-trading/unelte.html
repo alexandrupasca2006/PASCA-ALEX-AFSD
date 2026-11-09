@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unelte TPO</title>
+  <meta name="description" content="Constructor de profil TPO din bare de 30 de minute și calculator de Value Area din Volume Profile, cu pașii de calcul.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%232563d9'/%3E%3Crect x='5' y='5' width='6' height='2.6' rx='1' fill='white'/%3E%3Crect x='5' y='9' width='11' height='2.6' rx='1' fill='white'/%3E%3Crect x='5' y='13' width='14' height='2.6' rx='1' fill='white'/%3E%3Crect x='5' y='17' width='8' height='2.6' rx='1' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/tpo.js"></script>
+  <script src="assets/ui.js"></script>
+  <script src="assets/data.js"></script>
+  <script src="assets/unelte.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="4" y="4" width="6" height="3" rx="1"/><rect x="4" y="8.5" width="12" height="3" rx="1"/><rect x="4" y="13" width="16" height="3" rx="1"/><rect x="4" y="17.5" width="9" height="3" rx="1"/></svg></span>Curs AMT & Orderflow</a>
+      <nav class="nav" aria-label="Navigare principală">
+        <a href="index.html">Acasă</a>
+        <a href="lectia-1.html">Lecția 1</a>
+        <a href="analiza-zilei.html">Analiza zilei</a>
+        <a href="unelte.html">Unelte</a>
+        <a href="resurse.html">Resurse</a>
+      </nav>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Schimbă tema (luminos / întunecat)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg></button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="wrap-narrow" style="margin:0 auto;padding:0">
+      <p class="eyebrow">Unelte</p>
+      <h1>Constructor TPO și Value Area</h1>
+      <p class="lead">Lipești datele, apeși un buton și vezi profilul, nivelurile și fiecare pas al calculului.</p>
+    </div>
+
+    <h2 id="tpo">Constructor de profil TPO</h2>
+    <div class="grid-2">
+      <div class="card">
+        <form id="tpo-form" autocomplete="off" novalidate>
+          <label class="field">Barele de 30 de minute (sesiunea RTH, 16:30–23:00 RO)
+            <textarea id="tpo-bars" spellcheck="false"></textarea>
+          </label>
+          <div class="fields">
+            <label class="field">Mărimea rândului
+              <select id="tpo-row">
+                <option value="0.25">0,25 (1 tick ES)</option>
+                <option value="0.5">0,5</option>
+                <option value="1">1 punct</option>
+                <option value="2" selected>2 puncte</option>
+                <option value="4">4 puncte</option>
+                <option value="5">5 puncte</option>
+                <option value="10">10 puncte</option>
+              </select>
+            </label>
+            <label class="field">Value Area (%)
+              <input id="tpo-pct" type="number" min="50" max="95" step="1" value="70">
+            </label>
+            <label class="field">Metoda
+              <select id="tpo-method">
+                <option value="single" selected>Rând cu rând</option>
+                <option value="dual">Câte două rânduri</option>
+              </select>
+            </label>
+          </div>
+          <div class="btn-row">
+            <button class="btn" type="submit">Construiește profilul</button>
+            <button class="btn btn-ghost" type="button" id="tpo-demo">Încarcă ziua demo</button>
+          </div>
+          <div class="form-errors" id="tpo-errors" role="alert"></div>
+        </form>
+        <details>
+          <summary>Ce formate accept?</summary>
+          <div class="details-body small">
+            <p>Un rând pentru fiecare bară de 30 de minute, în ordine (prima = A = 16:30 RO). Ora și data sunt opționale:</p>
+<pre>16:30 7610 7596                  ← ora high low
+16:30 7600 7610 7596 7606        ← ora open high low close
+2026-11-06 16:30,7600,7610,7596,7606
+7602,25 7610,5                   ← virgula zecimală merge și ea</pre>
+            <p>Rândurile care încep cu <code>#</code> sunt ignorate. Cu open și close afli și unde a deschis și unde a închis ziua.</p>
+            <p><b>De unde iei barele:</b> pune în Quantower un chart de 30 de minute pe ES, doar sesiunea RTH, și notează high și low (ideal și open și close) pentru fiecare bară. Le vezi când treci cu mouse-ul peste bară. Dacă platforma îți permite să exporți datele, cu atât mai bine.</p>
+          </div>
+        </details>
+      </div>
+      <div class="card">
+        <div id="tpo-summary"><p class="muted">Rezultatul apare aici.</p></div>
+      </div>
+    </div>
+    <div class="card" id="tpo-profile-card" hidden>
+      <h3>Profilul</h3>
+      <div id="tpo-profile"></div>
+      <details>
+        <summary>Pașii calculului Value Area</summary>
+        <div class="details-body" id="tpo-steps"></div>
+      </details>
+    </div>
+
+    <h2 id="volum">Value Area din Volume Profile</h2>
+    <div class="grid-2">
+      <div class="card">
+        <form id="vol-form" autocomplete="off" novalidate>
+          <label class="field">Profilul de volum: un rând „preț volum” pe linie
+            <textarea id="vol-rows" spellcheck="false"></textarea>
+          </label>
+          <div class="fields">
+            <label class="field">Value Area (%)
+              <input id="vol-pct" type="number" min="50" max="95" step="1" value="70">
+            </label>
+            <label class="field">Metoda
+              <select id="vol-method">
+                <option value="single" selected>Rând cu rând</option>
+                <option value="dual">Câte două rânduri</option>
+              </select>
+            </label>
+          </div>
+          <div class="btn-row">
+            <button class="btn" type="submit">Calculează</button>
+            <button class="btn btn-ghost" type="button" id="vol-demo">Exemplul din Lecția 1</button>
+          </div>
+          <div class="form-errors" id="vol-errors" role="alert"></div>
+        </form>
+      </div>
+      <div class="card">
+        <div id="vol-out"><p class="muted">Rezultatul apare aici.</p></div>
+      </div>
+    </div>
+    <div class="card" id="vol-steps-card" hidden>
+      <h3>Pașii calculului</h3>
+      <div id="vol-steps"></div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">Material educațional, nu recomandare de investiții. Exersează în simulator înainte de a folosi bani reali.</div>
+  </footer>
+</body>
+</html>
