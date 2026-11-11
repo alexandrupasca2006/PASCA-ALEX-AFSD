@@ -16,7 +16,7 @@
       <a class="brand" href="index.html"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="4" y="4" width="6" height="3" rx="1"/><rect x="4" y="8.5" width="12" height="3" rx="1"/><rect x="4" y="13" width="16" height="3" rx="1"/><rect x="4" y="17.5" width="9" height="3" rx="1"/></svg></span>Curs AMT & Orderflow</a>
       <nav class="nav" aria-label="Navigare principală">
         <a href="index.html">Acasă</a>
-        <a href="lectia-1.html">Lecția 1</a>
+        <a href="index.html#plan" data-match="lectia-">Lecții</a>
         <a href="analiza-zilei.html">Analiza zilei</a>
         <a href="unelte.html">Unelte</a>
         <a href="resurse.html">Resurse</a>
@@ -60,13 +60,13 @@
     </div>
     <blockquote><p>Regula de bază: <b>context → locație (nivel) → confirmare (orderflow)</b>. Orderflow fără context e doar zgomot.</p></blockquote>
 
-    <h2>Planul cursului</h2>
+    <h2 id="plan">Planul cursului</h2>
     <div class="table-wrap">
       <table>
         <thead><tr><th>Modul</th><th>Lecție</th><th>Stare</th></tr></thead>
         <tbody>
           <tr data-progress-for="l1"><td rowspan="4"><b>1. AMT</b></td><td><span class="progress-dot"></span><a href="lectia-1.html">L1 · Licitația, valoarea și profilul</a></td><td><span class="badge badge-ok">Disponibilă</span></td></tr>
-          <tr><td><span class="progress-dot"></span>L2 · Deschiderea și Initial Balance</td><td><span class="badge badge-soon">În curând</span></td></tr>
+          <tr data-progress-for="l2"><td><span class="progress-dot"></span><a href="lectia-2.html">L2 · Deschiderea și Initial Balance</a></td><td><span class="badge badge-ok">Disponibilă</span></td></tr>
           <tr><td><span class="progress-dot"></span>L3 · Tipuri de zile și regula de 80%</td><td><span class="badge badge-soon">În curând</span></td></tr>
           <tr><td><span class="progress-dot"></span>L4 · Niveluri de referință</td><td><span class="badge badge-soon">În curând</span></td></tr>
           <tr><td><b>2. Time</b></td><td><span class="progress-dot"></span>L5 · Sesiuni, ore cheie, calendar</td><td><span class="badge badge-soon">În curând</span></td></tr>
@@ -93,6 +93,11 @@
         <span class="card-kicker">Profil</span>
         <h3>Constructor TPO</h3>
         <p class="muted">Lipești barele de 30 de minute și primești profilul cu POC, VA, IB, cozi, poor highs/lows și pașii de calcul.</p>
+      </a>
+      <a class="card" href="unelte.html#jurnal">
+        <span class="card-kicker">Statistici</span>
+        <h3>Jurnalul deschiderilor</h3>
+        <p class="muted">Notezi zilnic tipul deschiderii și IB-ul, iar jurnalul îți calculează propriile statistici.</p>
       </a>
       <a class="card" href="resurse.html">
         <span class="card-kicker">Referință</span>

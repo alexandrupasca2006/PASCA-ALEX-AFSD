@@ -170,49 +170,5 @@
     },
   ];
 
-  const quizEl = $('quiz-box');
-  const scoreEl = $('quiz-score');
-  const state = QUIZ.map(() => null);
-
-  function updateScore() {
-    const answered = state.filter((s) => s !== null).length;
-    if (!answered) { scoreEl.textContent = ''; return; }
-    const ok = state.filter((s, i) => s === QUIZ[i].correct).length;
-    scoreEl.className = 'result ' + (ok === QUIZ.length ? 'ok' : 'ko');
-    scoreEl.textContent = 'Scor: ' + ok + ' / ' + QUIZ.length + (answered < QUIZ.length ? ' (mai ai ' + (QUIZ.length - answered) + ' întrebări)' : ok === QUIZ.length ? '. Perfect!' : '. Recitește explicațiile la cele greșite.');
-  }
-
-  quizEl.innerHTML = QUIZ.map((item, qi) =>
-    '<div class="quiz-q" data-qi="' + qi + '"><h3>' + (qi + 1) + '. ' + UI.esc(item.q) + '</h3><div class="quiz-options">' +
-    item.options.map((o, oi) => '<button type="button" class="quiz-option" data-oi="' + oi + '">' + UI.esc(o) + '</button>').join('') +
-    '</div><div class="quiz-explain" hidden></div></div>'
-  ).join('') + '<div class="btn-row"><button type="button" class="btn btn-ghost" id="quiz-reset">Reia quiz-ul</button></div>';
-
-  quizEl.addEventListener('click', (e) => {
-    const btn = e.target.closest('.quiz-option');
-    if (!btn) return;
-    const wrap = btn.closest('.quiz-q');
-    const qi = Number(wrap.dataset.qi);
-    if (state[qi] !== null) return;
-    const oi = Number(btn.dataset.oi);
-    state[qi] = oi;
-    const item = QUIZ[qi];
-    wrap.querySelectorAll('.quiz-option').forEach((b, i) => {
-      b.disabled = true;
-      if (i === item.correct) b.classList.add('is-correct');
-      else if (i === oi) b.classList.add('is-wrong');
-    });
-    const ex = wrap.querySelector('.quiz-explain');
-    ex.innerHTML = (oi === item.correct ? '✅ <b>Corect.</b> ' : '❌ <b>Nu chiar.</b> ') + item.explain;
-    ex.hidden = false;
-    updateScore();
-  });
-
-  quizEl.addEventListener('click', (e) => {
-    if (e.target.id !== 'quiz-reset') return;
-    state.fill(null);
-    quizEl.querySelectorAll('.quiz-option').forEach((b) => { b.disabled = false; b.classList.remove('is-correct', 'is-wrong'); });
-    quizEl.querySelectorAll('.quiz-explain').forEach((x) => { x.hidden = true; x.innerHTML = ''; });
-    updateScore();
-  });
+  UI.renderQuiz($('quiz-box'), $('quiz-score'), QUIZ);
 })();

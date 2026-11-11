@@ -75,6 +75,48 @@
     ].join('\n'),
     demoDay2Overnight: { onh: 7628, onl: 7604 },
     demoRowSize: 2,
+
+    /*
+     * Lecția 2: primele 60 de minute după deschidere (un punct la fiecare 5 minute, 16:30 → 17:30 RO).
+     * Toate scenariile au aceleași niveluri din ziua precedentă. Prețuri inventate.
+     */
+    openLevels: { high: 5020, vah: 5012, poc: 5008, val: 5004, low: 4996 },
+
+    /* Ilustrații din lecție (în direcții opuse față de exercițiu, ca să vezi simetria). */
+    openIllustrations: {
+      OD: [4992, 4990, 4987, 4988, 4984, 4982, 4983, 4979, 4977, 4978, 4974, 4972, 4970],
+      OTD: [5002, 5004, 5005, 5004, 5001, 4998, 4995, 4993, 4994, 4990, 4988, 4989, 4986],
+      ORR: [5007, 5004, 5001, 5000, 5002, 5005, 5008, 5010, 5011, 5009, 5010, 5008, 5009],
+      OA: [5010, 5012, 5009, 5011, 5008, 5010, 5012, 5009, 5011, 5010, 5013, 5009, 5011],
+    },
+
+    /* Exercițiul 1 din Lecția 2: recunoaște locația și tipul deschiderii. */
+    openScenarios: [
+      {
+        path: [5024, 5026, 5028, 5027, 5031, 5033, 5032, 5036, 5038, 5037, 5040, 5042, 5044],
+        type: 'OD',
+        explain: 'Deschiderea (5024) e <b>peste maximul de ieri</b> (5020), adică gap în sus. Prețul pleacă imediat în sus și <b>nu se mai întoarce niciodată la deschidere</b>: <b>Open Drive</b>, convingere maximă. Deschiderea devine probabil minimul zilei. Nu vinzi contra mișcării; cauți cumpărări pe pullback-uri, iar o revenire sub deschidere ar invalida drive-ul.',
+      },
+      {
+        path: [5014, 5012, 5011, 5012, 5015, 5018, 5021, 5023, 5022, 5026, 5028, 5027, 5030],
+        type: 'OTD',
+        explain: 'Deschiderea (5014) e <b>peste VAH (5012), dar în range-ul de ieri</b>. Prețul coboară întâi să testeze VAH-ul, intră o clipă în VA (5011), nu găsește vânzători, apoi trece prin deschidere și urcă peste maximul de ieri: <b>Open Test Drive</b>. Testul a confirmat că nu există interes în jos; minimul testului (5011) devine o referință importantă.',
+      },
+      {
+        path: [5009, 5012, 5015, 5016, 5014, 5011, 5008, 5006, 5005, 5007, 5006, 5008, 5007],
+        type: 'ORR',
+        explain: 'Deschiderea (5009) e <b>în VA de ieri</b>. Prețul urcă spre maximul de ieri, e respins la 5016, revine prin deschidere, dar coborârea nu e la fel de convingătoare: piața ajunge să tranzacționeze în ambele direcții în jurul POC-ului. Asta e <b>Open Rejection Reverse</b>, cu convingere medie. Maximul inițial (5016) e un candidat pentru extrema zilei.',
+      },
+      {
+        path: [4999, 5001, 4998, 5000, 4997, 4999, 5001, 4998, 5000, 4999, 5002, 4998, 5000],
+        type: 'OA',
+        explain: 'Deschiderea (4999) e <b>sub VAL (5004), dar în range-ul de ieri</b>. Prețul oscilează în ambele direcții în jurul deschiderii, fără să plece: <b>Open Auction</b>, convingere mică. Aștepți IB-ul și urmărești dacă piața revine în VA (regula de 80% spre VAH) sau iese sub minimul de ieri (4996).',
+      },
+    ],
+
+    /* Exercițiul 2 din Lecția 2: lățimea IB-ului în ultimele 10 zile (puncte ES) și IB-ul de azi. */
+    ibHistory: [18, 22, 15, 25, 20, 17, 23, 19, 21, 20],
+    ibToday: 11,
   };
 
   if (typeof module !== 'undefined' && module.exports) module.exports = data;

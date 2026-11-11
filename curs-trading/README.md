@@ -15,8 +15,9 @@ Progresul și ce scrii în formulare se salvează doar în browserul tău (local
 |---|---|
 | `index.html` | Planul cursului și progresul |
 | `lectia-1.html` | Lecția 1: licitația, valoarea, profilul, cu exercițiu interactiv și quiz |
+| `lectia-2.html` | Lecția 2: deschiderea (locație, cele 4 tipuri, Initial Balance), cu grafice, exerciții și quiz |
 | `analiza-zilei.html` | Compară o zi cu ziua precedentă: deschidere, overnight, regula de 80%, migrarea valorii, niveluri pentru mâine |
-| `unelte.html` | Constructor de profil TPO din bare de 30 de minute și calculator de Value Area din volum |
+| `unelte.html` | Constructor de profil TPO, calculator de Value Area din volum și jurnalul deschiderilor |
 | `resurse.html` | Ore cheie în ora României, calendar, platforme, cărți, glosar, checklist |
 
 Codul e în `assets/`: `tpo.js` (motorul de calcul), `ui.js` (desenarea profilelor), câte un script pentru fiecare pagină și `style.css`.

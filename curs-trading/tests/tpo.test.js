@@ -167,4 +167,30 @@ test('Regula de 80%: declanșată și atinsă', () => {
   assert.strictEqual(r.reachedLetter, 'D');
 });
 
+test('Lecția 2: locațiile scenariilor de deschidere', () => {
+  const L = DATA.openLevels;
+  const d1 = { high: L.high, low: L.low, vah: L.vah, val: L.val, bucket: 0 };
+  const locs = DATA.openScenarios.map((s) => TPO.classifyOpen(s.path[0], d1));
+  assert.deepStrictEqual(locs, ['above-range', 'above-va', 'in-va', 'below-va']);
+  assert.deepStrictEqual(DATA.openScenarios.map((s) => s.type), ['OD', 'OTD', 'ORR', 'OA']);
+  DATA.openScenarios.concat(Object.values(DATA.openIllustrations).map((path) => ({ path }))).forEach((s) => {
+    assert.strictEqual(s.path.length, 13, 'fiecare scenariu are 13 puncte (16:30 → 17:30, din 5 în 5 minute)');
+  });
+});
+
+test('Lecția 2: Open Drive nu revine la deschidere, Open Auction rămâne în jurul ei', () => {
+  const od = DATA.openScenarios[0].path;
+  assert.ok(od.slice(1).every((p) => p > od[0]));
+  const odIll = DATA.openIllustrations.OD;
+  assert.ok(odIll.slice(1).every((p) => p < odIll[0]));
+  const oa = DATA.openScenarios[3].path;
+  assert.ok(oa.every((p) => Math.abs(p - oa[0]) <= 3));
+});
+
+test('Lecția 2: IB-ul de azi e îngust față de medie', () => {
+  const avg = DATA.ibHistory.reduce((s, x) => s + x, 0) / DATA.ibHistory.length;
+  assert.strictEqual(avg, 20);
+  assert.ok(DATA.ibToday / avg < 0.75);
+});
+
 console.log('\n' + passed + ' teste trecute.');

@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecția 2: Deschiderea</title>
+  <meta name="description" content="Modulul 1, Lecția 2: locația deschiderii față de ziua precedentă, cele 4 tipuri de deschidere (Dalton) și Initial Balance.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%232563d9'/%3E%3Crect x='5' y='5' width='6' height='2.6' rx='1' fill='white'/%3E%3Crect x='5' y='9' width='11' height='2.6' rx='1' fill='white'/%3E%3Crect x='5' y='13' width='14' height='2.6' rx='1' fill='white'/%3E%3Crect x='5' y='17' width='8' height='2.6' rx='1' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/tpo.js"></script>
+  <script src="assets/ui.js"></script>
+  <script src="assets/data.js"></script>
+  <script src="assets/lectia-2.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="4" y="4" width="6" height="3" rx="1"/><rect x="4" y="8.5" width="12" height="3" rx="1"/><rect x="4" y="13" width="16" height="3" rx="1"/><rect x="4" y="17.5" width="9" height="3" rx="1"/></svg></span>Curs AMT & Orderflow</a>
+      <nav class="nav" aria-label="Navigare principală">
+        <a href="index.html">Acasă</a>
+        <a href="index.html#plan" data-match="lectia-">Lecții</a>
+        <a href="analiza-zilei.html">Analiza zilei</a>
+        <a href="unelte.html">Unelte</a>
+        <a href="resurse.html">Resurse</a>
+      </nav>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Schimbă tema (luminos / întunecat)"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg></button>
+    </div>
+  </header>
+
+  <main class="wrap wrap-narrow">
+    <p class="eyebrow">Modulul 1 · AMT · Lecția 2</p>
+    <h1>Deschiderea și Initial Balance</h1>
+    <p class="lead">Primele 60 de minute îți spun cât de convinși sunt participanții și ce fel de zi urmează. Înveți să le citești în trei pași: locația, tipul deschiderii și Initial Balance.</p>
+
+    <div class="callout callout-tip">
+      <span class="callout-title">La finalul lecției vei ști</span>
+      <ul>
+        <li>să încadrezi deschiderea față de valoarea și range-ul de ieri și ce grad de încredere îți dă;</li>
+        <li>să recunoști cele 4 tipuri de deschidere: <i>Open Drive</i>, <i>Open Test Drive</i>, <i>Open Rejection Reverse</i> și <i>Open Auction</i>;</li>
+        <li>să judeci Initial Balance (îngust sau larg) față de media recentă;</li>
+        <li>să combini cele trei informații într-o ipoteză pentru restul zilei.</li>
+      </ul>
+    </div>
+
+    <nav class="toc" aria-label="Cuprins">
+      <b>Cuprins</b>
+      <ol>
+        <li><a href="#de-ce">De ce contează deschiderea</a></li>
+        <li><a href="#locatia">Pasul 1: locația</a></li>
+        <li><a href="#tipuri">Pasul 2: tipul deschiderii</a></li>
+        <li><a href="#ib">Pasul 3: Initial Balance</a></li>
+        <li><a href="#combinare">Pasul 4: combinarea</a></li>
+        <li><a href="#exemplu">Exemplu lucrat</a></li>
+        <li><a href="#greseli">Greșeli frecvente</a></li>
+        <li><a href="#rezumat">Rezumat</a></li>
+        <li><a href="#exercitiul-1">Exercițiul 1: recunoaște deschiderea</a></li>
+        <li><a href="#exercitiul-2">Exercițiul 2: IB îngust sau larg</a></li>
+        <li><a href="#exercitiul-3">Exercițiul 3: jurnalul deschiderilor</a></li>
+        <li><a href="#quiz">Quiz</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="de-ce">1. De ce contează deschiderea</h2>
+    <p>La 16:30 RO intră în piață participanții care au avut toată noaptea, plus datele macro de la 15:30, ca să-și formeze o opinie. Felul în care tranzacționează în primele minute îți arată <b>cât de convinși sunt</b>.</p>
+    <p>Îți pui trei întrebări, în ordine:</p>
+    <ol>
+      <li><b>Unde</b> deschide piața față de valoarea și range-ul de ieri?</li>
+      <li><b>Cum</b> se comportă prețul imediat după deschidere?</li>
+      <li><b>Cât de lat</b> e range-ul primei ore (Initial Balance)?</li>
+    </ol>
+    <p>Răspunsurile împreună îți dau gradul de încredere pentru ziua respectivă: echilibru sau dezechilibru, rotație sau trend.</p>
+
+    <h2 id="locatia">2. Pasul 1: locația deschiderii</h2>
+    <p>Ai văzut-o în Lecția 1. Acum o legăm de încredere:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Unde deschide</th><th>Ce spune piața</th><th>Încredere într-o mișcare direcțională</th></tr></thead>
+        <tbody>
+          <tr><td><b>În VA de ieri</b></td><td>Valoarea de ieri e încă acceptată</td><td>Mică</td></tr>
+          <tr><td><b>În afara VA, dar în range</b></td><td>Testează prețuri noi, dar încă în zona de ieri</td><td>Medie</td></tr>
+          <tr><td><b>În afara range-ului (gap)</b></td><td>Prețurile de ieri nu mai sunt considerate „corecte”</td><td>Mare, <i>dacă</i> prețul nu revine în range</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Locația îți spune doar <b>potențialul</b>. Confirmarea o dă comportamentul prețului după deschidere, adică pasul 2.</p>
+
+    <h2 id="tipuri">3. Pasul 2: cele 4 tipuri de deschidere</h2>
+    <p>James Dalton împarte deschiderile în patru tipuri, după cât de convinși sunt participanții. Graficele arată primele 60 de minute: linia albastră punctată e prețul de deschidere, iar zona galbenă e Value Area de ieri.</p>
+
+    <div class="open-types">
+      <div class="card">
+        <h3>Open Drive <span class="badge badge-ok">convingere maximă</span></h3>
+        <div data-illustration="OD"></div>
+        <p><b>Cum arată:</b> prețul pleacă agresiv într-o direcție imediat după 16:30 și <b>nu se mai întoarce la deschidere</b>.</p>
+        <p><b>Ce înseamnă:</b> OTF-ul intră cu activitate initiative. Deschiderea devine de multe ori extrema zilei.</p>
+        <p><b>Ce urmărești:</b> nu faci fade. Dacă prețul revine prin deschidere, drive-ul a eșuat, iar asta e semnalul de invalidare.</p>
+      </div>
+      <div class="card">
+        <h3>Open Test Drive <span class="badge badge-ok">convingere mare</span></h3>
+        <div data-illustration="OTD"></div>
+        <p><b>Cum arată:</b> prețul merge întâi în direcția opusă ca să <b>testeze o referință</b> cunoscută (VAH, VAL, maximul sau minimul de ieri, ONH/ONL). Nu găsește continuare, se întoarce, trece prin deschidere și pleacă în cealaltă direcție.</p>
+        <p><b>Ce înseamnă:</b> participanții „verifică” dacă mai există interes în direcția testată. Când nu există, pleacă cu convingere.</p>
+        <p><b>Ce urmărești:</b> extrema testului devine o referință importantă, de multe ori extrema zilei.</p>
+      </div>
+      <div class="card">
+        <h3>Open Rejection Reverse <span class="badge badge-accent">convingere medie</span></h3>
+        <div data-illustration="ORR"></div>
+        <p><b>Cum arată:</b> prețul pleacă într-o direcție, întâlnește activitate opusă suficient de puternică și se întoarce prin deschidere. Întoarcerea e mai puțin convingătoare, iar piața devine <b>two-sided</b> (tranzacționează în ambele direcții).</p>
+        <p><b>Ce înseamnă:</b> nicio parte nu domină clar. Extrema mișcării inițiale e des o extremă a zilei.</p>
+        <p><b>Ce urmărești:</b> tranzacții responsive; nu presupui o zi de trend.</p>
+      </div>
+      <div class="card">
+        <h3>Open Auction <span class="badge">convingere mică</span></h3>
+        <div data-illustration="OA"></div>
+        <p><b>Cum arată:</b> prețul oscilează în ambele direcții în jurul deschiderii, fără să plece.</p>
+        <p><b>Ce înseamnă:</b> piața caută informație. În range-ul de ieri sugerează echilibru. În afara range-ului, atenție: mișcarea direcțională poate veni mai târziu.</p>
+        <p><b>Ce urmărești:</b> aștepți IB-ul. Tranzacții responsive la marginile range-ului de la început.</p>
+      </div>
+    </div>
+
+    <blockquote><p>Ordinea convingerii: <b>Open Drive &gt; Open Test Drive &gt; Open Rejection Reverse &gt; Open Auction</b>.</p></blockquote>
+
+    <div class="callout callout-info">
+      <span class="callout-title">Open Test Drive sau Open Rejection Reverse?</span>
+      Ambele încep cu o mișcare care e apoi respinsă. Diferența e în ce urmează. La <b>Open Test Drive</b> testul e scurt, la o referință clară, iar drive-ul de după e puternic și continuu: trece de deschidere și pleacă. La <b>Open Rejection Reverse</b> întoarcerea e mai lentă și piața ajunge să tranzacționeze în ambele direcții.
+    </div>
+    <p><b>Când decizi tipul:</b> în primele minute și cel târziu până la sfârșitul perioadei A (17:00 RO). Atenție: datele macro de la <b>17:00 RO</b> (ISM, JOLTS, consumer confidence) pot schimba brusc comportamentul din perioada A.</p>
+
+    <h2 id="ib">4. Pasul 3: Initial Balance</h2>
+    <ul>
+      <li><b>IB = perioadele A + B</b>, adică 16:30–17:30 RO pentru ES.</li>
+      <li>Îl formează mai ales participanții <i>day timeframe</i>. OTF-ul intră des mai târziu, prin <b>range extension</b> (ieșirea din IB).</li>
+    </ul>
+    <p><b>Lățimea IB-ului contează relativ la media ta recentă</b> (ultimele 10–20 de zile), nu în valoare absolută:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>IB față de medie</th><th>Ce sugerează</th></tr></thead>
+        <tbody>
+          <tr><td><b>Îngust</b> (sub ~75% din medie)</td><td>Echilibru strâns la început. Range extension mai probabil, cu potențial de trend</td></tr>
+          <tr><td><b>Normal</b></td><td>Fără un indiciu clar; contează locația și tipul deschiderii</td></tr>
+          <tr><td><b>Larg</b> (peste ~125% din medie)</td><td>O mare parte din range-ul zilei s-a făcut deja. Mai probabilă o zi care rămâne în IB (Normal)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted small">Pragurile de 75% și 125% sunt o convenție practică pentru curs, nu o regulă universală. Îți faci propriile statistici cu <a href="unelte.html#jurnal">jurnalul deschiderilor</a>.</p>
+    <ul>
+      <li><b>Range extension:</b> contează direcția primei ieșiri din IB. Extensia în ambele direcții duce la zile Neutral (Lecția 3).</li>
+      <li><b>IB high / IB low ca referințe:</b> o ieșire din IB care eșuează (prețul revine în IB) duce des la o rotație spre partea opusă a IB-ului.</li>
+      <li><b>Zile cu știri:</b> în zilele de CPI sau NFP, IB-ul poate fi foarte larg. În zilele de FOMC (decizia la 21:00 RO), piața așteaptă de obicei, iar IB-ul de dimineață contează mai puțin.</li>
+    </ul>
+
+    <h2 id="combinare">5. Pasul 4: combinarea</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Locație</th><th>Tipul deschiderii</th><th>IB</th><th>Ipoteză pentru restul zilei</th></tr></thead>
+        <tbody>
+          <tr><td>În afara range-ului</td><td>Open Drive</td><td>Îngust sau normal</td><td>Zi de trend posibilă: cauți continuare pe pullback-uri, nu fade</td></tr>
+          <tr><td>Peste VA, în range</td><td>Open Test Drive (testează VAH și urcă)</td><td>—</td><td>Acceptare peste valoare: continuare spre maximul de ieri și peste</td></tr>
+          <tr><td>Peste VA, în range</td><td>Open Rejection Reverse (urcă, e respins, revine în VA)</td><td>—</td><td>Respingere: candidat pentru regula de 80% spre VAL</td></tr>
+          <tr><td>În VA</td><td>Open Auction</td><td>Larg</td><td>Zi de echilibru: tranzacții responsive la marginile IB și VA</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Acestea sunt <b>ipoteze</b>, nu certitudini. Le confirmi sau le infirmi pe parcursul zilei, iar confirmarea fină o dă orderflow-ul (Modulul 3).</p>
+
+    <h2 id="exemplu">6. Exemplu lucrat: ziua demo 2</h2>
+    <p>Folosim zilele inventate din <a href="analiza-zilei.html">Analiza zilei</a> (butonul „Încarcă exemplul demo”).</p>
+    <ul>
+      <li><b>Contextul:</b> ziua demo 1 a avut range-ul 7596–7620, VA 7606–7616 și un <i>poor high</i> la 7620. Overnight-ul s-a mișcat între 7604 și 7628 (date macro la 15:30).</li>
+      <li><b>Locația:</b> deschidere la <b>7624</b>, peste range-ul de ieri. Potențial de dezechilibru puternic.</li>
+      <li><b>Perioada A (16:30–17:00):</b> prețul coboară până la 7619. Intră o clipă în range-ul de ieri și testează zona poor high-ului (7620), dar nu găsește vânzători. Urcă și închide perioada la 7627, peste deschidere. Asta e un <b>Open Test Drive în sus</b>, iar poor high-ul de ieri a fost „reparat”.</li>
+      <li><b>Perioada B (17:00–17:30):</b> continuă până la 7633. <b>IB = 7619–7633</b> (14 puncte).</li>
+      <li><b>Perioada C (17:30):</b> range extension în sus, până la 7638: OTF-ul intră în joc.</li>
+      <li><b>Rezultatul:</b> zi de trend în sus, închidere la 7651 și valoare mai sus decât ieri.</li>
+    </ul>
+
+    <h2 id="greseli">7. Greșeli frecvente</h2>
+    <ul>
+      <li><b>Fade la un Open Drive</b> („a urcat prea mult, trebuie să scadă”). Exact atunci convingerea e maximă.</li>
+      <li><b>Tranzacționezi agresiv într-un Open Auction</b>, când piața nu are încă direcție.</li>
+      <li><b>Decizi tipul deschiderii după 2 minute sau după 2 ore.</b> Prea devreme e zgomot, prea târziu nu mai e util.</li>
+      <li><b>Ignori ora:</b> reacția la datele de la 15:30 a făcut deja o parte din mișcare înainte de 16:30.</li>
+      <li><b>Judeci IB-ul în valoare absolută</b>, nu față de media ultimelor zile.</li>
+    </ul>
+
+    <h2 id="rezumat">Rezumat în 5 idei</h2>
+    <ol>
+      <li>Deschiderea e cel mai bogat moment informațional al zilei: îți arată convingerea participanților.</li>
+      <li>Locația (în VA / în afara VA / în afara range-ului) îți dă potențialul; comportamentul după deschidere îl confirmă.</li>
+      <li>Ordinea convingerii: Open Drive &gt; Open Test Drive &gt; Open Rejection Reverse &gt; Open Auction.</li>
+      <li>IB = prima oră (16:30–17:30 RO). Îngust față de medie înseamnă extensie mai probabilă; larg înseamnă zi mai probabil în IB.</li>
+      <li>Combini locația, tipul deschiderii și IB-ul într-o ipoteză pe care o verifici pe parcursul zilei.</li>
+    </ol>
+
+    <h2 id="exercitiul-1">✏️ Exercițiul 1: recunoaște deschiderea</h2>
+    <p>Pentru fiecare scenariu, alege locația deschiderii față de ziua precedentă și tipul deschiderii. Toate scenariile au aceleași niveluri de ieri: H 5020, VAH 5012, POC 5008, VAL 5004, L 4996.</p>
+    <form id="ex-open" autocomplete="off" novalidate>
+      <div id="scenarios"></div>
+      <div class="btn-row">
+        <button class="btn" type="submit">Verifică</button>
+        <button class="btn btn-secondary" type="button" id="ex-open-explain">Arată explicațiile</button>
+        <button class="btn btn-ghost" type="button" id="ex-open-reset">Resetează</button>
+      </div>
+      <div class="result" id="ex-open-result" role="status"></div>
+    </form>
+
+    <h2 id="exercitiul-2">✏️ Exercițiul 2: IB îngust sau larg?</h2>
+    <div class="card exercise">
+      <p>Lățimea IB-ului pe ES în ultimele 10 zile (în puncte):</p>
+      <div class="table-wrap"><table id="ib-history"></table></div>
+      <p>Azi, IB-ul are <b id="ib-today"></b> puncte.</p>
+      <form id="ex-ib" autocomplete="off" novalidate>
+        <div class="fields" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))">
+          <label class="field" data-q="avg">Media IB-ului din ultimele 10 zile<input name="avg" inputmode="decimal"><span class="hint"></span></label>
+          <label class="field" data-q="width">IB-ul de azi e…
+            <select name="width"><option value="">alege…</option><option value="ingust">Îngust</option><option value="normal">Normal</option><option value="larg">Larg</option></select><span class="hint"></span>
+          </label>
+          <label class="field" data-q="expect">Ce e mai probabil?
+            <select name="expect"><option value="">alege…</option><option value="ext">Range extension (ieșire din IB)</option><option value="inside">Ziua rămâne în IB</option><option value="none">Nu se poate spune nimic</option></select><span class="hint"></span>
+          </label>
+        </div>
+        <div class="btn-row">
+          <button class="btn" type="submit">Verifică</button>
+        </div>
+        <div class="result" id="ex-ib-result" role="status"></div>
+      </form>
+    </div>
+
+    <h2 id="exercitiul-3">🖥️ Exercițiul 3: jurnalul deschiderilor (în Quantower)</h2>
+    <p>În următoarele 5 sesiuni (sau pe zile recente, în replay), notează pentru fiecare zi:</p>
+    <ol>
+      <li><b>La 16:30:</b> locația deschiderii față de VA și range-ul de ieri (RTH).</li>
+      <li><b>Până la 17:00:</b> tipul deschiderii.</li>
+      <li><b>La 17:30:</b> lățimea IB-ului și comparația cu media.</li>
+      <li><b>La 23:00:</b> dacă IB-ul a fost extins și în ce direcție.</li>
+    </ol>
+    <p>Trece-le în <a href="unelte.html#jurnal">Jurnalul deschiderilor</a>. Îți calculează singur media IB-ului și cât de des a fost extins după fiecare tip de deschidere, iar tabelul îl poți copia și trimite în chat ca să-l discutăm.</p>
+
+    <h2 id="quiz">❓ Quiz</h2>
+    <div id="quiz-box"></div>
+    <div class="result" id="quiz-score" role="status"></div>
+
+    <hr>
+    <div class="card done-box">
+      <div>
+        <b>Gata cu Lecția 2?</b>
+        <p class="muted small" style="margin:0">Trimite-mi în chat răspunsurile și primele zile din jurnal. Urmează <b>Lecția 3: Tipuri de zile și regula de 80%</b>.</p>
+      </div>
+      <button class="btn" type="button" data-complete="l2">Marchează lecția ca terminată</button>
+    </div>
+    <div class="lesson-nav">
+      <a class="btn btn-secondary" href="lectia-1.html">← Lecția 1</a>
+      <a class="btn btn-secondary" href="index.html#plan">Planul cursului</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap wrap-narrow">Material educațional, nu recomandare de investiții. Exersează în simulator înainte de a folosi bani reali.</div>
+  </footer>
+</body>
+</html>

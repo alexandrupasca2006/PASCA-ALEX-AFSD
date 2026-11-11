@@ -468,3 +468,27 @@ details > .details-body { padding: 0 16px 14px; }
   body { background: #fff; color: #000; }
   .card { box-shadow: none; }
 }
+
+/* ---------- Graficul deschiderii (Lecția 2) ---------- */
+
+.ch { display: block; width: 100%; height: auto; max-width: 600px; }
+.ch-band { fill: var(--surface-2); }
+.ch-va { fill: var(--va); }
+.ch-level { stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 5 5; }
+.ch-level.ch-poc { stroke: var(--poc); }
+.ch-open { stroke: var(--accent); stroke-width: 1.8; stroke-dasharray: 2 5; }
+.ch-path { fill: none; stroke: var(--text); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.ch-open-dot { fill: var(--accent); }
+.ch-label { fill: var(--muted); font: 600 16px var(--font); }
+.ch-label-poc { fill: var(--poc); }
+.ch-label-open { fill: var(--accent-text); }
+.ch-tick, .ch-period { fill: var(--muted); font: 14px var(--font); }
+
+.open-types { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); margin: 1em 0; }
+.open-types .card h3 { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.scenario .fields { grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); }
+.explain { margin-top: 10px; font-size: 0.95rem; padding: 10px 14px; border-radius: 10px; background: var(--surface-2); }
+.explain[hidden] { display: none; }
+
+.btn-sm { padding: 4px 9px; font-size: 0.85rem; }
+.lesson-nav { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 16px; }

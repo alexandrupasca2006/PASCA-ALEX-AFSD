@@ -11,6 +11,7 @@
   <script src="assets/ui.js"></script>
   <script src="assets/data.js"></script>
   <script src="assets/unelte.js" defer></script>
+  <script src="assets/jurnal.js" defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -18,7 +19,7 @@
       <a class="brand" href="index.html"><span class="brand-mark"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="4" y="4" width="6" height="3" rx="1"/><rect x="4" y="8.5" width="12" height="3" rx="1"/><rect x="4" y="13" width="16" height="3" rx="1"/><rect x="4" y="17.5" width="9" height="3" rx="1"/></svg></span>Curs AMT & Orderflow</a>
       <nav class="nav" aria-label="Navigare principală">
         <a href="index.html">Acasă</a>
-        <a href="lectia-1.html">Lecția 1</a>
+        <a href="index.html#plan" data-match="lectia-">Lecții</a>
         <a href="analiza-zilei.html">Analiza zilei</a>
         <a href="unelte.html">Unelte</a>
         <a href="resurse.html">Resurse</a>
@@ -30,8 +31,8 @@
   <main class="wrap">
     <div class="wrap-narrow" style="margin:0 auto;padding:0">
       <p class="eyebrow">Unelte</p>
-      <h1>Constructor TPO și Value Area</h1>
-      <p class="lead">Lipești datele, apeși un buton și vezi profilul, nivelurile și fiecare pas al calculului.</p>
+      <h1>Unelte</h1>
+      <p class="lead">Constructorul de profil TPO, calculatorul de Value Area și jurnalul deschiderilor. Lipești datele, apeși un buton și vezi fiecare pas.</p>
     </div>
 
     <h2 id="tpo">Constructor de profil TPO</h2>
@@ -127,6 +128,76 @@
     <div class="card" id="vol-steps-card" hidden>
       <h3>Pașii calculului</h3>
       <div id="vol-steps"></div>
+    </div>
+    <h2 id="jurnal">Jurnalul deschiderilor</h2>
+    <p class="muted">Notezi în fiecare zi locația deschiderii, tipul ei, lățimea IB-ului și dacă a fost extins. Jurnalul îți calculează propriile statistici (Lecția 2, Exercițiul 3). Se salvează doar în browserul tău.</p>
+    <div class="card">
+      <form id="j-form" autocomplete="off" novalidate>
+        <div class="fields" style="grid-template-columns:repeat(auto-fill,minmax(min(100%,170px),1fr))">
+          <label class="field">Data<input id="j-date" placeholder="ex: 2026-11-12"></label>
+          <label class="field">Locația deschiderii
+            <select id="j-loc">
+              <option value="">—</option>
+              <option value="above-range">Peste range (gap sus)</option>
+              <option value="above-va">Peste VA, în range</option>
+              <option value="in-va">În VA</option>
+              <option value="below-va">Sub VA, în range</option>
+              <option value="below-range">Sub range (gap jos)</option>
+            </select>
+          </label>
+          <label class="field">Tipul deschiderii
+            <select id="j-type">
+              <option value="">—</option>
+              <option value="OD">Open Drive</option>
+              <option value="OTD">Open Test Drive</option>
+              <option value="ORR">Open Rejection Reverse</option>
+              <option value="OA">Open Auction</option>
+            </select>
+          </label>
+          <label class="field">IB (puncte)<input id="j-ib" inputmode="decimal"></label>
+          <label class="field">IB extins?
+            <select id="j-ext">
+              <option value="">—</option>
+              <option value="nu">Nu</option>
+              <option value="sus">Da, în sus</option>
+              <option value="jos">Da, în jos</option>
+              <option value="ambele">Da, în ambele direcții</option>
+            </select>
+          </label>
+          <label class="field">Tipul zilei (Lecția 3)
+            <select id="j-day">
+              <option value="">—</option>
+              <option>Normal</option>
+              <option>Normal Variation</option>
+              <option>Trend</option>
+              <option>Double Distribution</option>
+              <option>Neutral Center</option>
+              <option>Neutral Extreme</option>
+              <option>Non-Trend</option>
+            </select>
+          </label>
+        </div>
+        <label class="field">Notă (opțional)<input id="j-note" maxlength="200" placeholder="ex: NFP la 15:30, deschidere peste ONH"></label>
+        <div class="btn-row">
+          <button class="btn" type="submit">Adaugă ziua</button>
+        </div>
+        <div class="form-errors" id="j-errors" role="alert"></div>
+      </form>
+    </div>
+    <div class="card">
+      <h3>Statistici</h3>
+      <div id="j-stats"><p class="muted">Adaugă câteva zile ca să apară statisticile.</p></div>
+    </div>
+    <div class="card">
+      <h3>Zilele notate</h3>
+      <div id="j-table"></div>
+      <details>
+        <summary>Copiază jurnalul ca text (CSV), ca să mi-l trimiți în chat</summary>
+        <div class="details-body">
+          <textarea id="j-csv" readonly style="min-height:120px"></textarea>
+          <div class="btn-row"><button class="btn btn-secondary" type="button" id="j-copy">Copiază</button><span class="muted small" id="j-copy-status" role="status"></span></div>
+        </div>
+      </details>
     </div>
   </main>
 

@@ -76,7 +76,8 @@
     }
     const here = global.location.pathname.split('/').pop() || 'index.html';
     document.querySelectorAll('.nav a').forEach((a) => {
-      if (a.getAttribute('href') === here) a.setAttribute('aria-current', 'page');
+      const match = a.getAttribute('data-match');
+      if (a.getAttribute('href') === here || (match && here.indexOf(match) === 0)) a.setAttribute('aria-current', 'page');
     });
     document.querySelectorAll('[data-complete]').forEach((b) => {
       b.addEventListener('click', () => {
@@ -312,7 +313,114 @@
       '<p class="legend"><span><i class="sw sw-va"></i>Value Area (liniile punctate = VA de ieri, prelungită)</span><span><i class="sw" style="background:var(--muted);opacity:.55;width:6px"></i>range</span><span><i class="sw" style="background:var(--on);width:6px"></i>range overnight</span></p>';
   }
 
+  /* ---------- Graficul primelor 60 de minute (Lecția 2) ---------- */
+
+  /**
+   * sc: { levels: {high, vah, poc, val, low}, path: [prețuri la fiecare 5 minute, primul = deschiderea] }
+   */
+  function renderOpenChart(el, sc, opts) {
+    opts = opts || {};
+    const W = 520;
+    const H = 250;
+    const x0 = 24;
+    const x1 = 398;
+    const y0 = 30;
+    const y1 = 212;
+    const lv = sc.levels;
+    const path = sc.path;
+    const n = path.length;
+    const keys = [['high', 'H ieri'], ['vah', 'VAH'], ['poc', 'POC'], ['val', 'VAL'], ['low', 'L ieri']];
+    const vals = path.concat(keys.map(([k]) => lv[k]).filter(isNum));
+    let max = Math.max(...vals);
+    let min = Math.min(...vals);
+    const pad = (max - min) * 0.06 || 1;
+    max += pad;
+    min -= pad;
+    const y = (p) => y0 + ((max - p) / (max - min)) * (y1 - y0);
+    const x = (i) => x0 + (i / (n - 1)) * (x1 - x0);
+    const half = Math.round((n - 1) / 2);
+    const parts = [];
+    parts.push('<rect class="ch-band" x="' + x0 + '" y="' + y0 + '" width="' + (x(half) - x0) + '" height="' + (y1 - y0) + '"/>');
+    parts.push('<text class="ch-period" x="' + (x0 + x(half)) / 2 + '" y="' + (y0 - 10) + '" text-anchor="middle">A · 16:30–17:00</text>');
+    parts.push('<text class="ch-period" x="' + (x(half) + x1) / 2 + '" y="' + (y0 - 10) + '" text-anchor="middle">B · 17:00–17:30</text>');
+    if (isNum(lv.vah) && isNum(lv.val)) {
+      parts.push('<rect class="ch-va" x="' + x0 + '" y="' + y(lv.vah) + '" width="' + (x1 - x0) + '" height="' + (y(lv.val) - y(lv.vah)) + '"/>');
+    }
+    const labels = [];
+    keys.forEach(([k, name]) => {
+      if (!isNum(lv[k])) return;
+      parts.push('<line class="ch-level' + (k === 'poc' ? ' ch-poc' : '') + '" x1="' + x0 + '" x2="' + x1 + '" y1="' + y(lv[k]) + '" y2="' + y(lv[k]) + '"/>');
+      labels.push({ y: y(lv[k]), text: name + ' ' + TPO.formatPrice(lv[k]), cls: k === 'poc' ? 'ch-label ch-label-poc' : 'ch-label' });
+    });
+    const open = path[0];
+    parts.push('<line class="ch-open" x1="' + x0 + '" x2="' + x1 + '" y1="' + y(open) + '" y2="' + y(open) + '"/>');
+    labels.push({ y: y(open), text: 'Open ' + TPO.formatPrice(open), cls: 'ch-label ch-label-open' });
+    parts.push('<polyline class="ch-path" points="' + path.map((p, i) => x(i).toFixed(1) + ',' + y(p).toFixed(1)).join(' ') + '"/>');
+    parts.push('<circle class="ch-open-dot" cx="' + x(0) + '" cy="' + y(open) + '" r="5"/>');
+    // Etichetele din dreapta nu au voie să se suprapună.
+    labels.sort((a, b) => a.y - b.y);
+    for (let i = 1; i < labels.length; i++) {
+      if (labels[i].y < labels[i - 1].y + 17) labels[i].y = labels[i - 1].y + 17;
+    }
+    const over = labels.length ? labels[labels.length - 1].y - (H - 34) : 0;
+    if (over > 0) labels.forEach((l) => { l.y -= over; });
+    labels.forEach((l) => parts.push('<text class="' + l.cls + '" x="' + (x1 + 8) + '" y="' + (l.y + 5).toFixed(1) + '">' + esc(l.text) + '</text>'));
+    [[0, '16:30'], [Math.round((n - 1) / 4), '16:45'], [half, '17:00'], [Math.round((3 * (n - 1)) / 4), '17:15'], [n - 1, '17:30']].forEach(([i, t]) => {
+      parts.push('<text class="ch-tick" x="' + x(i) + '" y="' + (H - 12) + '" text-anchor="middle">' + t + '</text>');
+    });
+    el.innerHTML = '<svg class="ch" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(opts.label || 'Primele 60 de minute după deschidere') + '">' + parts.join('') + '</svg>';
+  }
+
+  /* ---------- Quiz ---------- */
+
+  /** items: [{ q, options: [...], correct: index, explain: html }] */
+  function renderQuiz(el, scoreEl, items) {
+    const state = items.map(() => null);
+    function updateScore() {
+      const answered = state.filter((s) => s !== null).length;
+      if (!answered) { scoreEl.textContent = ''; scoreEl.className = 'result'; return; }
+      const ok = state.filter((s, i) => s === items[i].correct).length;
+      scoreEl.className = 'result ' + (ok === items.length ? 'ok' : 'ko');
+      scoreEl.textContent = 'Scor: ' + ok + ' / ' + items.length +
+        (answered < items.length ? ' (mai ai ' + (items.length - answered) + ' întrebări)' : ok === items.length ? '. Perfect!' : '. Recitește explicațiile la cele greșite.');
+    }
+    el.innerHTML = items.map((item, qi) =>
+      '<div class="quiz-q" data-qi="' + qi + '"><h3>' + (qi + 1) + '. ' + esc(item.q) + '</h3><div class="quiz-options">' +
+      item.options.map((o, oi) => '<button type="button" class="quiz-option" data-oi="' + oi + '">' + esc(o) + '</button>').join('') +
+      '</div><div class="quiz-explain" hidden></div></div>'
+    ).join('') + '<div class="btn-row"><button type="button" class="btn btn-ghost" data-quiz-reset>Reia quiz-ul</button></div>';
+
+    el.addEventListener('click', (e) => {
+      if (e.target.closest('[data-quiz-reset]')) {
+        state.fill(null);
+        el.querySelectorAll('.quiz-option').forEach((b) => { b.disabled = false; b.classList.remove('is-correct', 'is-wrong'); });
+        el.querySelectorAll('.quiz-explain').forEach((x) => { x.hidden = true; x.innerHTML = ''; });
+        updateScore();
+        return;
+      }
+      const btn = e.target.closest('.quiz-option');
+      if (!btn) return;
+      const wrap = btn.closest('.quiz-q');
+      const qi = Number(wrap.dataset.qi);
+      if (state[qi] !== null) return;
+      const oi = Number(btn.dataset.oi);
+      state[qi] = oi;
+      const item = items[qi];
+      wrap.querySelectorAll('.quiz-option').forEach((b, i) => {
+        b.disabled = true;
+        if (i === item.correct) b.classList.add('is-correct');
+        else if (i === oi) b.classList.add('is-wrong');
+      });
+      const ex = wrap.querySelector('.quiz-explain');
+      ex.innerHTML = (oi === item.correct ? '✅ <b>Corect.</b> ' : '❌ <b>Nu chiar.</b> ') + item.explain;
+      ex.hidden = false;
+      updateScore();
+    });
+  }
+
   global.UI = {
+    renderOpenChart,
+    renderQuiz,
     store,
     esc,
     isNum,
